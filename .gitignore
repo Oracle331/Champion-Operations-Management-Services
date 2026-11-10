@@ -5,3 +5,10 @@ crm-smoke.png
 backend/.env
 backend/data/
 backend/target/
+.env
+.env.*
+!.env.example
+.agents/
+.codex/
+.vscode/
+.github/modernize/

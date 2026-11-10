@@ -1,6 +1,6 @@
 # Google Workspace Setup
 
-## What Is Already In The App
+## Current features
 
 - `/api/integrations/google/setup`
 - `/api/integrations/google/authorize`
@@ -9,7 +9,7 @@
 - Encrypted refresh-token storage.
 - Local `GOOGLE_REDIRECT_URI=http://localhost:8080/api/integrations/google/callback`.
 
-## What You Need To Do In Google
+## Google Cloud setup
 
 1. Create or choose a Google Cloud project.
 2. Enable the Gmail API.
@@ -19,7 +19,7 @@
 6. Create an OAuth Web Client.
 7. Add authorized redirect URIs:
    - Local: `http://localhost:8080/api/integrations/google/callback`
-   - Hosted: `https://app.championoperations.com/api/integrations/google/callback`
+   - Hosted: `https://app.example.com/api/integrations/google/callback`
 8. Create or choose a restricted Google Maps API key for Street View Static API.
 9. Copy the client ID, client secret, and Maps API key into `backend/.env` locally and into host environment variables in production.
 
