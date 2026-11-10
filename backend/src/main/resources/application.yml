@@ -1,0 +1,76 @@
+server:
+  port: ${PORT:8080}
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        secure: ${SESSION_COOKIE_SECURE:false}
+        same-site: strict
+
+spring:
+  application:
+    name: champion-transaction-crm
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/champion_crm}
+    username: ${DATABASE_USERNAME:champion}
+    password: ${DATABASE_PASSWORD:champion}
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  cors:
+    allowed-origins:
+      - http://localhost:4173
+      - http://127.0.0.1:4173
+      - http://localhost:5173
+      - http://127.0.0.1:5173
+      - http://localhost:8080
+      - http://127.0.0.1:8080
+    allowed-origin-patterns: []
+  bootstrap:
+    admin-email: ${APP_BOOTSTRAP_ADMIN_EMAIL:}
+    admin-password: ${APP_BOOTSTRAP_ADMIN_PASSWORD:}
+    admin-name: ${APP_BOOTSTRAP_ADMIN_NAME:Champion Agent}
+    admin-reset-password: ${APP_BOOTSTRAP_ADMIN_RESET_PASSWORD:false}
+  security:
+    token-key-base64: ${APP_TOKEN_ENCRYPTION_KEY_BASE64:}
+    allow-agent-agent-provisioning: ${ALLOW_AGENT_AGENT_PROVISIONING:false}
+  google:
+    client-id: ${GOOGLE_CLIENT_ID:}
+    client-secret: ${GOOGLE_CLIENT_SECRET:}
+    redirect-uri: ${GOOGLE_REDIRECT_URI:http://localhost:8080/api/integrations/google/callback}
+    maps-api-key: ${GOOGLE_MAPS_API_KEY:}
+    scopes:
+      - openid
+      - profile
+      - email
+      - https://www.googleapis.com/auth/calendar.events
+      - https://www.googleapis.com/auth/gmail.send
+  airtable:
+    api-url: ${AIRTABLE_API_URL:https://api.airtable.com/v0}
+    personal-access-token: ${AIRTABLE_PERSONAL_ACCESS_TOKEN:}
+    base-id: ${AIRTABLE_BASE_ID:}
+    table-name: ${AIRTABLE_TABLE_NAME:Leads}
+  make:
+    new-lead-webhook-url: ${MAKE_NEW_LEAD_WEBHOOK_URL:}
+    webhook-api-key: ${MAKE_WEBHOOK_API_KEY:}
+  email:
+    default-from: ${MAIL_FROM:no-reply@championoperations.local}

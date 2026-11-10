@@ -1,0 +1,7 @@
+data/*.json
+*.log
+.browser-profile/
+crm-smoke.png
+backend/.env
+backend/data/
+backend/target/

@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Champion Transaction CRM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Manrope:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <img
+            class="brand-logo"
+            src="https://images.squarespace-cdn.com/content/v1/67098e72d0c8615e7ed9952d/47131350-96f1-4e2a-a866-0982489a0355/CO+Logo+-+Black.png?format=300w"
+            alt="Champion Operations"
+          />
+          <div>
+            <p class="eyebrow">Champion Operations</p>
+            <h1>Transaction CRM</h1>
+          </div>
+        </div>
+
+        <nav class="nav-stack" aria-label="Primary">
+          <button class="nav-item active" data-view="dashboard" type="button">
+            <span class="nav-icon" aria-hidden="true">D</span>
+            Dashboard
+          </button>
+          <button class="nav-item" data-view="leads" type="button">
+            <span class="nav-icon" aria-hidden="true">L</span>
+            Leads
+          </button>
+          <button class="nav-item" data-view="transactions" type="button">
+            <span class="nav-icon" aria-hidden="true">T</span>
+            Transactions
+          </button>
+          <button class="nav-item" data-view="workflows" type="button">
+            <span class="nav-icon" aria-hidden="true">W</span>
+            Workflows
+          </button>
+          <button class="nav-item" data-view="communications" type="button">
+            <span class="nav-icon" aria-hidden="true">M</span>
+            Messages
+          </button>
+          <button class="nav-item" data-view="access" type="button">
+            <span class="nav-icon" aria-hidden="true">A</span>
+            Access
+          </button>
+          <button class="nav-item" data-view="integrations" type="button">
+            <span class="nav-icon" aria-hidden="true">G</span>
+            Integrations
+          </button>
+          <button class="nav-item" data-view="audit" type="button">
+            <span class="nav-icon" aria-hidden="true">R</span>
+            Audit
+          </button>
+        </nav>
+
+        <section class="sidebar-panel">
+          <p class="section-kicker">Account</p>
+          <label class="account-switcher">
+            <span class="sr-only">Current account</span>
+            <select id="accountSelect"></select>
+          </label>
+          <p id="backendStatus">Local browser mode. Run the backend for real session enforcement.</p>
+          <div class="sidebar-actions">
+            <button class="ghost-btn" id="exportData" type="button">Export JSON</button>
+            <button class="ghost-btn danger" id="resetData" type="button">Reset Demo</button>
+          </div>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="viewEyebrow">DMV Real Estate</p>
+            <h2 id="viewTitle">Dashboard</h2>
+          </div>
+          <div class="topbar-actions">
+            <label class="search-box">
+              <span class="sr-only">Search transactions</span>
+              <input id="searchInput" type="search" placeholder="Search address, client, task" />
+            </label>
+            <button class="ghost-btn" id="logoutButton" type="button">Logout</button>
+            <button class="primary-btn" id="openNewTransaction" type="button">New Transaction</button>
+          </div>
+        </header>
+
+        <section class="notice-strip" aria-label="Important notice">
+          <strong>Workflow note:</strong>
+          <span>
+            This starter uses public legal sources as operational reminders, not legal advice. Keep forms,
+            contract language, and brokerage policy reviewed by counsel before production use.
+          </span>
+        </section>
+
+        <div id="appRoot" class="view-root"></div>
+      </main>
+    </div>
+
+    <dialog class="modal" id="transactionModal">
+      <form method="dialog" id="transactionForm" class="modal-card">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Intake</p>
+            <h3>Create Transaction</h3>
+          </div>
+          <button class="icon-btn" type="button" id="closeTransactionModal" aria-label="Close">x</button>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            Property address
+            <input name="address" required placeholder="123 Main St, Bethesda, MD" />
+          </label>
+          <label>
+            Client name
+            <input name="client" required placeholder="Avery Johnson" />
+          </label>
+          <label>
+            Client email
+            <input name="contactEmail" type="email" placeholder="avery@example.com" />
+          </label>
+          <label>
+            Jurisdiction
+            <select name="jurisdiction" required>
+              <option value="MD">Maryland</option>
+              <option value="DC">District of Columbia</option>
+              <option value="VA">Virginia</option>
+            </select>
+          </label>
+          <label>
+            Workflow
+            <select name="role" required>
+              <option value="seller">Seller</option>
+              <option value="buyer">Buyer</option>
+              <option value="agent">Agent coordination</option>
+            </select>
+          </label>
+          <label>
+            Property type
+            <select name="propertyType" required>
+              <option value="single-family">Single family</option>
+              <option value="condo">Condo</option>
+              <option value="townhome">Townhome / HOA</option>
+              <option value="multi-unit">2-4 unit residential</option>
+            </select>
+          </label>
+          <label>
+            Stage
+            <select name="stage" required>
+              <option value="Intake">Intake</option>
+              <option value="Under Contract">Under Contract</option>
+              <option value="Contingencies">Contingencies</option>
+              <option value="Settlement Prep">Settlement Prep</option>
+              <option value="Closed">Closed</option>
+            </select>
+          </label>
+          <label>
+            Contract date
+            <input name="contractDate" required type="date" />
+          </label>
+          <label>
+            Target closing
+            <input name="closingDate" required type="date" />
+          </label>
+          <label>
+            Year built
+            <input name="builtYear" required type="number" min="1600" max="2100" value="1975" />
+          </label>
+          <label>
+            Price
+            <input name="price" type="number" min="0" step="1000" placeholder="625000" />
+          </label>
+          <label>
+            Property photo URL
+            <input name="photoUrl" type="url" placeholder="https://..." />
+          </label>
+          <label class="checkbox-line">
+            <input name="tenantOccupied" type="checkbox" />
+            Tenant occupied
+          </label>
+          <label class="checkbox-line">
+            <input name="financing" type="checkbox" checked />
+            Financing involved
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button class="ghost-btn" type="button" id="cancelTransaction">Cancel</button>
+          <button class="primary-btn" type="submit">Create and Generate Timeline</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>

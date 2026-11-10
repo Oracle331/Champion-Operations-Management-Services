@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: champion-crm-postgres
+    environment:
+      POSTGRES_DB: champion_crm
+      POSTGRES_USER: champion
+      POSTGRES_PASSWORD: champion
+    ports:
+      - "5432:5432"
+    volumes:
+      - champion-crm-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U champion -d champion_crm"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: champion-crm-mailpit
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  champion-crm-postgres:

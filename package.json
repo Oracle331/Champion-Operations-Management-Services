@@ -1,0 +1,13 @@
+{
+  "name": "champion-transaction-crm",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Spring-hosted real estate transaction CRM prototype.",
+  "scripts": {
+    "start": "powershell -NoProfile -ExecutionPolicy Bypass -File backend/run-local.ps1",
+    "check": "node --check app.js && powershell -NoProfile -ExecutionPolicy Bypass -Command \"$env:JAVA_HOME='C:\\Program Files\\Java\\jdk-24'; Set-Location backend; .\\mvnw.cmd test\""
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
